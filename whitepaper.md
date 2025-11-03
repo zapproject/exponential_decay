@@ -8,11 +8,11 @@
 
 ## Abstract
 
-Zap v3.0 introduces a bonding curve mechanism enhanced by an exponential decay exit tax. When tokens are sold, 99% of the exit tax simulates buying additional tokens into the reserve without delivering them to any holder, effectively raising the price floor as if those tokens were purchased but left locked in the contract. This boosts the reserve pool, creates a self-reinforcing stability loop, and aligns incentives for long-term holding. The remaining 1% of the tax is burned for deflationary pressure. The tax decays from 99% to near 0% over 100 days, transitioning to organic demand-driven growth.
+Zap v3 introduces a bonding curve mechanism enhanced by an exponential decay exit tax. When tokens are sold, 99% of the exit tax simulates buying additional tokens into the reserve without delivering them to any holder, effectively raising the price floor as if those tokens were purchased but left locked in the contract. This boosts the reserve pool, creates a self-reinforcing stability loop, and aligns incentives for long-term holding. The remaining 1% of the tax is burned for deflationary pressure. The tax decays from 99% to near 0% over 100 days, transitioning to organic demand-driven growth.
 
 ## 1. Introduction
 
-Traditional bonding curves in token launches suffer from high volatility and dump risks due to early speculation. Zap v3.0 addresses this by reinvesting exit taxes in a way that simulates additional buys, increasing reserves without expanding circulating supply. This transforms sell pressure into price support, fostering sustainable growth.
+Traditional bonding curves in token launches suffer from high volatility and dump risks due to early speculation. Zap v3 addresses this by reinvesting exit taxes in a way that simulates additional buys, increasing reserves without expanding circulating supply. This transforms sell pressure into price support, fostering sustainable growth.
 
 ## 2. Mechanism Design
 
@@ -154,7 +154,7 @@ Early high-volume sells (small \(t\), large \(T(t)\)): \(\Delta R\) dominates. E
 
 ## 8. Comparison to Pump.fun
 
-| Feature            | Pump.fun          | Zap v3.0                     |
+| Feature            | Pump.fun          | Zap v3                     |
 |--------------------|-------------------|---------------------------------|
 | Price Stability   | Low               | High (Tax-Simulated Buys)      |
 | Reserve Growth    | None              | Exponential via Locked Buys    |
@@ -162,7 +162,7 @@ Early high-volume sells (small \(t\), large \(T(t)\)): \(\Delta R\) dominates. E
 
 ## 9. Conclusion
 
-Zap v3.0 reinvents bonding curves by using exit taxes to simulate buys that lock value in the contract, transforming speculation into stability. This flywheel—where volatility fuels growth—aligns all holders for long-term success.
+Zap v3 reinvents bonding curves by using exit taxes to simulate buys that lock value in the contract, transforming speculation into stability. This flywheel—where volatility fuels growth—aligns all holders for long-term success.
 
 ## Appendices
 
