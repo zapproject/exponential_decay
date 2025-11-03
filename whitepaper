@@ -103,6 +103,14 @@ By reinvesting exit taxes into the bonding curve’s reserve, PumpHodl v2 transf
 
 --- 
 
+Decay Formula Derivation: The tax rate T(t) = 0.99 × e^{-0.04652t} starts at 99% (t=0: e^0=1, so 0.99×1=0.99). The decay constant 0.04652 is chosen so e^{-0.04652×100} ≈ e^{-4.652} ≈ 0.0095, yielding T(100) ≈ 0.99×0.0095 ≈ 0.0094 (0.94%), effectively nearing 0% over 100 days asymptotically. This constant is derived from solving for k in e^{-kτ} = ε/ initial, where τ=100 days and ε is a small threshold (e.g., 1% of initial).
+Half-Life Calculation: The time for tax to halve is t_half = ln(2)/0.04652 ≈ 0.693/0.04652 ≈ 14.9 days. So, from 99% at t=0, it drops to ~49.5% at ~15 days, ~24.75% at ~30 days, aligning with gradual holder incentivization.
+Reinvestment Breakdown: For a sale of x tokens at price P(n) after t days, total tax collected = x × P(n) × T(t). Then, reinvested ΔR = 0.99 × [x × P(n) × T(t)] = x × P(n) × 0.99 × T(t) wait, no—per whitepaper, 99% of exit tax reinvested, so ΔR = x × P(n) × T(t) × 0.99; burned = x × P(n) × T(t) × 0.01. This splits the decayed tax further for reserve boost and deflation.
+Impact on Reserve Dynamics: Cumulative ΔR sums into R(n) = ∫_0^n P(s) ds + Σ ΔR. Assuming original curve P(s) = c × e^{d s} (exponential bonding, per example integral 0.0001 e^{0.0001s}), reinvested taxes create a feedback loop: higher R(n) → higher P(n) → larger future taxes → exponential reserve growth beyond baseline.
+Stability Proof Expansion: For m sales, R(n) grows super-linearly as Σ x_i P(n_i) T(t_i) compounds. Price P_new(n) > P_original(n) since dR/dn > P(n) from taxes, per dP/dn = (dR/dn - P(n))/n > 0. In limit, this can lead to P(n) ~ k n^α with α>0, steeper than linear.
+Simulation Insight: At high sell volume early (t small, T(t) large), ΔR dominates, potentially doubling R(n) quickly—e.g., if 10% of supply sold at t=1, ΔR ≈ 0.99 × (0.1 n P(n) × 0.945) ≈ 0.093 n P(n), adding ~9.3% to R(n), bumping P(n) by ~9.3%. Over time, as T(t)→0, growth shifts to organic buys.
+Edge Cases: At t→∞, T(t)→0, no tax—pure bonding curve. If no sales, R(n) = original integral. Rapid dumps: tax recaptures most value, minimizing net supply increase while inflating reserves, turning "dumps" into net positives.
+
 **Appendices (Updated)**  
 - **Appendix D**: Reserve Growth Simulations (Tax vs. No-Tax Scenarios).  
 - **Appendix E**: Smart Contract Code Snippets for Tax Reinvestment.  
